@@ -2,7 +2,7 @@ import UIKit
 
 // MARK: - Template Coordinators
 
-class BaseCoordinator: Coordinator {
+open class BaseCoordinator: Coordinator {
     var rootCoordinator: Coordinator? = nil
     var childCoordinators: [Coordinator] = []
     var finishCompletion: (() -> Void)? = nil
@@ -24,7 +24,7 @@ class BaseCoordinator: Coordinator {
     }
 }
 
-class BasePresenter: BaseCoordinator, Presenter {
+open class BasePresenter: BaseCoordinator, Presenter {
     var childControllers: [UIViewController] = []
     var presenter: UIViewController?
     required init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil) {
