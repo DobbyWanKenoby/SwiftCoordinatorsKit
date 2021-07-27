@@ -32,7 +32,7 @@ extension Coordinator {
 // MARK: - Presenter
 // Координатор-презентор отвечает за отображение данных на экране
 
-protocol Presenter where Self: Coordinator {
+public protocol Presenter where Self: Coordinator {
     var childControllers: [UIViewController] { get set }
     var presenter: UIViewController? { get set }
     // Переход к экрану
@@ -73,7 +73,7 @@ extension Presenter {
 
 // MARK: TransitionDelegate
 
-protocol SCKTransitionDelegate: UIViewControllerTransitioningDelegate {
+public protocol SCKTransitionDelegate: UIViewControllerTransitioningDelegate {
     init(transitionData: TransitionData?)
 }
 
@@ -85,16 +85,16 @@ extension SCKTransitionDelegate {
 
 // Данные для UIViewControllerTransitioningDelegate, обеспечивающие кастомный переход
 // Тут могут находиться произвольные данные, которые необходимо передать в UIViewControllerTransitioningDelegate
-protocol TransitionData {}
+public protocol TransitionData {}
 
 // Типы переходов между вью контроллерами
-enum RouteMethod {
+public enum RouteMethod {
     case presentCard
     case navigationPush
     case custom(SCKTransitionDelegate)
 }
 
-enum DisrouteMethod {
+public enum DisrouteMethod {
     case dismiss
     case navigationPop
 }
@@ -107,13 +107,13 @@ enum DisrouteMethod {
 // Координаторы-ресиверы могут принимать и обрабатывать передаваемые данные
 
 // Передаваемые (transmit) и принимаемые/обрабатываемые (receive) данные должны быть подписаны на данный протокол
-protocol Signal {}
+public protocol Signal {}
 
 
 // Координатор-трансмиттер может передавать данные дальше в цепочке трансмиттеров.
 // Данные передаются родительскому и дочерним координаторам
 // Ответ отправляется в координатор, отправивший сигнал (source)
-protocol Transmitter where Self: Coordinator {
+public protocol Transmitter where Self: Coordinator {
     // Передача данных в связанные координаторы и контроллеры
     // При таком запросе координатор не ожидает ответ
     // а если ответ все же будет , то он будет обработан в методе receive источника запроса
@@ -188,7 +188,7 @@ extension Transmitter {
 }
 
 // Координатор-ресивер может обрабатывать принимаемые сигналы
-protocol Receiver {
+public protocol Receiver {
     @discardableResult
     func receive(signal: Signal) -> Signal?
 }
