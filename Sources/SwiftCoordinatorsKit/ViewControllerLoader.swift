@@ -3,7 +3,7 @@ import UIKit
 // Точка входа в любой контроллер - метод getInstance
 // Сам определяет, создан ли контрллер с помощью Storyboard или кодом
 extension UIViewController {
-    static func getInstance() -> Self {
+    public static func getInstance() -> Self {
         if let controller = (Self() as? StoryboardBasedViewController) {
             return controller.getInstanceFromStoryboard() as! Self
         } else {
@@ -25,7 +25,7 @@ public protocol StoryboardBasedViewController: AnyObject {
 }
 
 extension StoryboardBasedViewController where Self: UIViewController {
-    func getInstanceFromStoryboard() -> Self {
+    public func getInstanceFromStoryboard() -> Self {
         let storyboard = UIStoryboard(name: storyboardFileName, bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as! Self
     }

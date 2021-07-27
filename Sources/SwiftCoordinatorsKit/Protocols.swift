@@ -78,7 +78,7 @@ public protocol SCKTransitionDelegate: UIViewControllerTransitioningDelegate {
 }
 
 extension SCKTransitionDelegate {
-    init(transitionData: TransitionData? = nil) {
+    public init(transitionData: TransitionData? = nil) {
         fatalError("This initializator can not used in \(Self.self) type")
     }
 }
@@ -131,18 +131,18 @@ public protocol Transmitter where Self: Coordinator {
 
 extension Transmitter {
     
-    func edit(signal: Signal) -> Signal {
+    public func edit(signal: Signal) -> Signal {
         return signal
     }
     
-    func broadcast(signalWithReturnAnswer signal: Signal) -> [Signal] {
+    public func broadcast(signalWithReturnAnswer signal: Signal) -> [Signal] {
         var coordinators: [Coordinator] = []
         var resultSignals: [Signal] = []
         self.send(signal: signal, handledCoordinators: &coordinators, resultSignals: &resultSignals)
         return resultSignals
     }
     
-    func broadcast(signal: Signal, withAnswerToReceiver receiver: Receiver?) {
+    public func broadcast(signal: Signal, withAnswerToReceiver receiver: Receiver?) {
         var coordinators: [Coordinator] = []
         var resultSignals: [Signal] = []
         self.send(signal: signal, handledCoordinators: &coordinators, resultSignals: &resultSignals)
@@ -194,7 +194,7 @@ public protocol Receiver {
 }
 
 extension Receiver {
-    func receive(signal: Signal) -> Signal? {
+   public func receive(signal: Signal) -> Signal? {
         return nil
     }
 }
