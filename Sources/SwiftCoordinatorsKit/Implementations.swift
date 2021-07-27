@@ -3,38 +3,38 @@ import UIKit
 // MARK: - Template Coordinators
 
 open class BaseCoordinator: Coordinator {
-    var rootCoordinator: Coordinator? = nil
-    var childCoordinators: [Coordinator] = []
-    var finishCompletion: (() -> Void)? = nil
+    public var rootCoordinator: Coordinator? = nil
+    public var childCoordinators: [Coordinator] = []
+    public var finishCompletion: (() -> Void)? = nil
     @discardableResult
-    required init(rootCoordinator: Coordinator? = nil) {
+    required public init(rootCoordinator: Coordinator? = nil) {
         if let rootCoordinator = rootCoordinator {
             self.rootCoordinator = rootCoordinator
             self.rootCoordinator?.childCoordinators.append(self)
         }
     }
     
-    func startFlow(finishCompletion: (() -> Void)? = nil) {
+    public func startFlow(finishCompletion: (() -> Void)? = nil) {
         self.finishCompletion = finishCompletion
     }
     
-    func finishFlow() {
+    public func finishFlow() {
         self.finishCompletion?()
         self.rootCoordinator?.removeChild(coordinator: self)
     }
 }
 
 open class BasePresenter: BaseCoordinator, Presenter {
-    var childControllers: [UIViewController] = []
-    var presenter: UIViewController?
-    required init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil) {
+    public var childControllers: [UIViewController] = []
+    public var presenter: UIViewController?
+    required public init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil) {
         super.init(rootCoordinator: rootCoordinator)
         if let presenter = presenter {
             self.presenter = presenter
         }
     }
     
-    @discardableResult required init(rootCoordinator: Coordinator? = nil) {
+    @discardableResult required public init(rootCoordinator: Coordinator? = nil) {
         fatalError("init(rootCoordinator:) has not been implemented")
     }
 }

@@ -1,4 +1,4 @@
-### Version 0.3.3 2021-07-27
+### Version 0.3.4 2021-07-27
 - Created SwiftPM package on GitHub
 - Updated classes & protocol visibility
 

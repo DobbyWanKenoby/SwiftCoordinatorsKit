@@ -19,7 +19,7 @@ public protocol Coordinator: AnyObject {
 }
 
 extension Coordinator {
-    func removeChild(coordinator: Coordinator) {
+    public func removeChild(coordinator: Coordinator) {
         for (index, child) in childCoordinators.enumerated() {
             if child === coordinator {
                 child.rootCoordinator = nil
@@ -42,7 +42,7 @@ public protocol Presenter where Self: Coordinator {
 }
 
 extension Presenter {
-    func route(from sourceController: UIViewController, to destinationController: UIViewController, method: RouteMethod, completion: (() -> Void)? = nil) {
+    public func route(from sourceController: UIViewController, to destinationController: UIViewController, method: RouteMethod, completion: (() -> Void)? = nil) {
         switch method {
         case .custom(let transitionDelegate):
             destinationController.transitioningDelegate = transitionDelegate
@@ -58,7 +58,7 @@ extension Presenter {
             completion?()
         }
     }
-    
+    public   
     func disroute(controller: UIViewController, method: DisrouteMethod, completion: (() -> Void)? = nil) {
         switch method {
         
