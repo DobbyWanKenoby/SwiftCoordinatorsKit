@@ -15,7 +15,7 @@ extension UIViewController {
 // View Controller должен быть подписан на протокол StoryboardBasedViewController, если он создается на основе Storyboard
 // Точка входа в любой ViewController - статический метод getInstance()
 // он сам определяет, грузить Controller со Storyboard или создавать напрямую
-protocol StoryboardBasedViewController: AnyObject {
+public protocol StoryboardBasedViewController: AnyObject {
     /// Storyboard ID контроллера в storyboard-файле
     var viewControllerIdentifier: String { get }
     /// Имя storyboard файла, где хранится контроллер
