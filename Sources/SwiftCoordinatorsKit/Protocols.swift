@@ -18,7 +18,7 @@ public protocol Coordinator: AnyObject {
     func removeChild(coordinator: Coordinator)
 }
 
-extension Coordinator {
+extension Coordinator {    
     public func removeChild(coordinator: Coordinator) {
         for (index, child) in childCoordinators.enumerated() {
             if child === coordinator {
