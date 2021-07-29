@@ -1,3 +1,6 @@
+### 0.3.8
+- Fixed errors
+
 ### 0.3.7
 - Reorganized structure of protocols & classes
 - Updated documentation
