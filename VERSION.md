@@ -1,3 +1,6 @@
+### 0.3.9
+- Updated documentations
+
 ### 0.3.8
 - Fixed errors
 
