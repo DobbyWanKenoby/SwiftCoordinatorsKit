@@ -1,7 +1,9 @@
 import UIKit
 
-// Точка входа в любой контроллер - метод getInstance
-// Сам определяет, создан ли контрллер с помощью Storyboard или кодом
+// Позволяет организовать типовое получения экземпляра View Controller
+// При этом неважно, создан ли он с помощью Storyboard или кодом
+
+// Для олучения экземпляра используется метод getInstance
 extension UIViewController {
     public static func getInstance() -> Self {
         if let controller = (Self() as? StoryboardBasedViewController) {

@@ -13,13 +13,9 @@ class ApplicationCoordinator: Coordinator {
     var rootCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     
-    func startFlow(finishCompletion: (() -> Void)?) {
-        
-    }
+    func startFlow(finishCompletion: (() -> Void)?) {}
     
-    func finishFlow() {
-        
-    }
+    func finishFlow() {}
 }
 
 // Пример подчиненного координатора

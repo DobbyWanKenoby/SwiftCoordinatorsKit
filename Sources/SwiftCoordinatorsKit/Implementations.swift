@@ -1,7 +1,9 @@
 import UIKit
 
-// MARK: - Template Coordinators
+// Типовые координаторы, которые могут быть использованы в проекте
 
+// Базовый координатор
+// При создании принимает ссылку на родительский коодинатор
 open class BaseCoordinator: Coordinator {
     open var rootCoordinator: Coordinator? = nil
     open var childCoordinators: [Coordinator] = []
@@ -20,10 +22,19 @@ open class BaseCoordinator: Coordinator {
     
     open func finishFlow() {
         self.finishCompletion?()
-        self.rootCoordinator?.removeChild(coordinator: self)
+        if let rootCoordinator = rootCoordinator  {
+            for (index, child) in rootCoordinator.childCoordinators.enumerated() {
+               if child === self {
+                   child.rootCoordinator = nil
+                   childCoordinators.remove(at: index)
+               }
+           }
+        }
     }
 }
 
+// Базовый презентер
+// // При создании принимает ссылку на родительский коодинатор и контроллер, в котором будет отображать интерфейс (например Tab Bar Controller или Navigation Controller)
 open class BasePresenter: BaseCoordinator, Presenter {
     open var childControllers: [UIViewController] = []
     open var presenter: UIViewController?

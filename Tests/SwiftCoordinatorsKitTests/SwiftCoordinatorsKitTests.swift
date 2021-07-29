@@ -20,4 +20,18 @@
             XCTAssertTrue(coordinator.childCoordinators.count == 1)
         }
         
+        func testTemplatesCoordinators() {
+            let baseCoordinator = BaseCoordinator(rootCoordinator: nil)
+            let secondCoordinator = BaseCoordinator(rootCoordinator: baseCoordinator)
+            let presenter = UIViewController()
+            let basePresenter = BasePresenter(presenter: presenter, rootCoordinator: secondCoordinator)
+            
+            XCTAssertEqual(baseCoordinator.childCoordinators.count, 1)
+            XCTAssertTrue(secondCoordinator.rootCoordinator === baseCoordinator)
+            XCTAssertTrue(secondCoordinator.childCoordinators.first! === basePresenter)
+            XCTAssertNotNil(basePresenter.rootCoordinator)
+            XCTAssertTrue(basePresenter.presenter === presenter)
+            XCTAssertEqual(basePresenter.childControllers.count, 0)
+        }
+        
     }
