@@ -25,8 +25,8 @@ open class BaseCoordinator: Coordinator {
         if let rootCoordinator = rootCoordinator  {
             for (index, child) in rootCoordinator.childCoordinators.enumerated() {
                if child === self {
-                   child.rootCoordinator = nil
-                   childCoordinators.remove(at: index)
+                    rootCoordinator.childCoordinators.remove(at: index)
+                    child.rootCoordinator = nil
                }
            }
         }
