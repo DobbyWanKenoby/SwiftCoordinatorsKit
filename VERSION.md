@@ -1,3 +1,6 @@
+### 0.3.11
+- Added example project to package
+
 ### 0.3.10
 - Fixed errors
 
