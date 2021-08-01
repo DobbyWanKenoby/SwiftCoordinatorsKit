@@ -1,3 +1,8 @@
+### 0.4.0
+- Added new route method
+- Updated example project
+- Updated documentations
+
 ### 0.3.11
 - Added example project to package
 
