@@ -5,9 +5,9 @@ import UIKit
  Предназначен для отображения основного интерфейса приложения
  */
 
-protocol FunctionalControllerProtocol where Self: UIViewController {}
+protocol RedControllerProtocol where Self: UIViewController {}
 
-class FunctionalController: UIViewController, FunctionalControllerProtocol {
+class RedController: UIViewController, RedControllerProtocol {
 
     var initializationDidEnd: (() -> Void)?
     

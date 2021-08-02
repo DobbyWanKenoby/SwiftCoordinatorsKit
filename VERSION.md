@@ -1,3 +1,9 @@
+### 1.0.1
+- Core updated (not compability with old core version)
+- New coordinator's workmodes added (normal, isolate, trunk)
+- Now Presenter & Transmitter transmit Signal to presenter view controller (not only childs)
+- Default imlementation of AppCoordinator and SceneCoordinator added
+
 ### 0.4.0
 - Added new route method
 - Updated example project

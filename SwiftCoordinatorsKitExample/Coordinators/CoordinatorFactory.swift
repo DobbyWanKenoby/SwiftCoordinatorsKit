@@ -10,24 +10,37 @@ class CoordinatorFactory {
     
     // MARK: Главный координатор приложения
     @discardableResult
-    static func getApplicationCoordinator() -> ApplicationCoordinatorProtocol {
-        // в качестве презентера в координатор передаем nil
-        // данный координатор будет отображать в своем презентере содержимое других подчиненных координаторов
-        // подробнее об ApplicationCoordinator на странице его объявления
-        return ApplicationCoordinator(presenter: nil)
+    static func getAppCoordinator() -> AppCoordinator {
+        return AppCoordinator()
+    }
+    
+    // MARK: Координатор сцены
+    @discardableResult
+    static func getSceneCoordinator(appCoordinator: AppCoordinator, window: UIWindow) -> SceneCoordinator {
+        return SceneCoordinator(appCoordinator: appCoordinator, window: window)
+    }
+    
+    // MARK: Координатор основного потока
+    @discardableResult
+    static func getMainFlowCoordinator(rootCoordinator: Coordinator) -> MainFlowCoordinatorProtocol {
+        return MainFlowCoordinator(rootCoordinator: rootCoordinator)
     }
     
     // MARK: Координатор инициализации
+    // Используется для обеспечения процесса загрузки приложения
+    // и отображения результатов этой загрузки
     @discardableResult
     static func getInitializatorCoordinator(rootCoordinator coordinator: Coordinator?) -> InitializatorCoordinatorProtocol {
-        let controller = ControllerFactory.getInitializatorController()
+        let controller = ControllerFactory.getGreenController()
         return InitializatorCoordinator(presenter: controller, rootCoordinator: coordinator)
     }
-
+    
+    // MARK: Координатор основного функционала
+    // Используется для работы с основными функциями приложения
+    // запускается после отбработки координатора инициализации
     @discardableResult
     static func getFunctionalCoordinator(rootCoordinator: Coordinator?) -> FunctionalCoordinatorProtocol {
-        let controller = ControllerFactory.getFunctionalController()
-        return FunctionalCoordinator(presenter: controller, rootCoordinator: rootCoordinator)
+        return FunctionalCoordinator(rootCoordinator: rootCoordinator)
     }
 
 
