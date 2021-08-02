@@ -205,6 +205,7 @@ extension Transmitter {
         let signal = edit(signal: inputSignal)
         
         // определение режима работы координатора и дальнейшая рассылка сигнала
+        print("\(Self.self) \(options)")
         if options.contains(.isolateMode) {
             send(signalOnIsolateMode: signal,
                  handledCoordinators: &handledCoordinators,

@@ -1,3 +1,6 @@
+### 1.0.3
+- Fixed core bugs
+
 ### 1.0.2
 - Fixed core bugs
 

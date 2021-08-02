@@ -16,10 +16,6 @@ public protocol Coordinator: class {
 }
 
 extension Coordinator {
-    
-    public var options: [CoordinatorOption] {
-        return []
-    }
 
     func startFlow(finishCompletion: (() -> Void)? = nil) {
         self.finishCompletion = finishCompletion
