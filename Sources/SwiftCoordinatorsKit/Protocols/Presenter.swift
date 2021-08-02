@@ -20,6 +20,11 @@ extension Presenter {
             destinationController.transitioningDelegate = transitionDelegate
             destinationController.modalPresentationStyle = .custom
             sourceController.present(destinationController, animated: true, completion: completion)
+        case .presentFullScreen:
+            sourceController.transitioningDelegate = nil
+            destinationController.modalPresentationStyle = .fullScreen
+            destinationController.modalTransitionStyle = .coverVertical
+            sourceController.present(destinationController, animated: true, completion: completion)
         case .presentCard:
             sourceController.transitioningDelegate = nil
             sourceController.modalPresentationStyle = .none
@@ -30,8 +35,8 @@ extension Presenter {
             completion?()
         }
     }
-    public
-    func disroute(controller: UIViewController, method: DisrouteMethod, completion: (() -> Void)? = nil) {
+    
+    public func disroute(controller: UIViewController, method: DisrouteMethod, completion: (() -> Void)? = nil) {
         switch method {
         
         case .dismiss:
@@ -63,6 +68,7 @@ public protocol TransitionData {}
 // Типы переходов между вью контроллерами
 public enum RouteMethod {
     case presentCard
+    case presentFullScreen
     case navigationPush
     case custom(SCKTransitionDelegate)
 }

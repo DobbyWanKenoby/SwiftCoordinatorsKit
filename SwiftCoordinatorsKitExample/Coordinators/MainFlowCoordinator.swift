@@ -9,9 +9,6 @@ import SwiftCoordinatorsKit
 protocol MainFlowCoordinatorProtocol: BasePresenter, Transmitter {}
 
 class MainFlowCoordinator: BasePresenter, MainFlowCoordinatorProtocol {
-
-    var isShared = false
-    var mode: CoordinatorMode = .normal
     
     override var presenter: UIViewController? {
         didSet {
@@ -19,14 +16,20 @@ class MainFlowCoordinator: BasePresenter, MainFlowCoordinatorProtocol {
         }
     }
     
-    required init(rootCoordinator: Coordinator? = nil) {
-        super.init(rootCoordinator: rootCoordinator)
-        presenter = nil
-        //(rootCoordinator as! SceneCoordinator).presenter = presenter
+    required init(rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
+        super.init(presenter: nil, rootCoordinator: rootCoordinator, options: options)
     }
     
     required public init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil) {
         fatalError("init(presenter:rootCoordinator:) has not been implemented")
+    }
+    
+    required public init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
+        fatalError("init(presenter:rootCoordinator:options:) has not been implemented")
+    }
+    
+    @discardableResult required public init(rootCoordinator: Coordinator? = nil) {
+        fatalError("init(rootCoordinator:) has not been implemented")
     }
     
     override func startFlow(finishCompletion: (() -> Void)? = nil) {

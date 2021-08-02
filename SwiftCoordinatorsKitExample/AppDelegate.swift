@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  SwiftCoordinatorsKitExample
-//
-//  Created by Vasily Usov on 31.07.2021.
-//
-
 import UIKit
 
 @main

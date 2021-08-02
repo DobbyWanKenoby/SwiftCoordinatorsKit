@@ -1,5 +1,5 @@
 // Базовый протоколо, которому должен соответствовать юбой координатор
-public protocol Coordinator: class {
+public protocol Coordinator: AnyObject {
     // Настройки координатора
     var options: [CoordinatorOption] { get }
     // Замыкание, которое будет выполнено по завершению потока

@@ -1,4 +1,6 @@
-<<<<<<< HEAD
+### 1.0.4
+- Fixed core bugs
+
 ### 1.0.3
 - Fixed core bugs
 
@@ -16,8 +18,6 @@
 - Updated example project
 - Updated documentations
 
-=======
->>>>>>> parent of 75badda (0.4.0)
 ### 0.3.11
 - Added example project to package
 

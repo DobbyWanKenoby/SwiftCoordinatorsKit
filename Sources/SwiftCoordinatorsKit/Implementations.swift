@@ -1,8 +1,9 @@
 import UIKit
 
 // Типовые координаторы, которые могут быть использованы в проекте
+// ТАк же на их основе можно создавать собственные координаторы
 
-// Базовый координатор
+// MARK: Базовый координатор
 // При создании принимает ссылку на родительский коодинатор
 open class BaseCoordinator: Coordinator {
     open var options: [CoordinatorOption] = []
@@ -24,7 +25,7 @@ open class BaseCoordinator: Coordinator {
 
 }
 
-// Базовый презентер
+// MARK: Базовый презентер
 // // При создании принимает ссылку на родительский коодинатор и контроллер, в котором будет отображать интерфейс (например Tab Bar Controller или Navigation Controller)
 open class BasePresenter: BaseCoordinator, Presenter {
     open var childControllers: [UIViewController] = []
@@ -51,15 +52,19 @@ open class BasePresenter: BaseCoordinator, Presenter {
 // Управляет общей работой приложения и всеми общими для приложения ресурсами
 open class AppCoordinator: BaseCoordinator, Transmitter {
     
-    public required init(rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
-        if rootCoordinator != nil {
-            fatalError("AppCoordinator can not have root coordinator")
-        }
+    public required init(options: [CoordinatorOption] = []) {
         super.init(rootCoordinator: nil, options: options)
     }
     
     convenience init() {
         self.init(rootCoordinator: nil)
+    }
+    
+    @discardableResult required public init(rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
+        if rootCoordinator != nil {
+            fatalError("init(rootCoordinator:options:) has not been implemented")
+        }
+        super.init(rootCoordinator: nil, options: options)
     }
     
 }
@@ -80,8 +85,8 @@ open class SceneCoordinator: BasePresenter, Transmitter {
         }
     }
     
-    convenience init(appCoordinator: AppCoordinator, window: UIWindow) {
-        self.init(presenter: nil, rootCoordinator: appCoordinator)
+    convenience init(appCoordinator: AppCoordinator, window: UIWindow, options: [CoordinatorOption] = []) {
+        self.init(presenter: nil, rootCoordinator: appCoordinator, options: options)
         self.window = window
     }
     
