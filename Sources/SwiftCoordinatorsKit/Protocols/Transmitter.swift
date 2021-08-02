@@ -20,15 +20,6 @@ public protocol Signal {}
 // или в другой указанный координатор
 public protocol Transmitter where Self: Coordinator {
     
-    // Является ли координатор общим
-    // Signal передается в общий координатор, даже если включено изолирование (mode == .isolate)
-    // Координатор необходимо сделать общим, если он предоставляет некоторые общие для приложения ресурсы
-    var isShared: Bool { get set }
-    
-    // Режим изолирования дочерних координаторов
-    // Данные, поступившие от одного дочернего координатора не поступают в другие, а идут только в root coordinator
-    var mode: CoordinatorMode { get set }
-    
     // Передача данных в связанные координаторы и контроллеры
     // При таком запросе координатор не ожидает ответ
     // а если ответ все же будет , то он будет обработан в методе receive ресивера, указанного в параметре withAnswerToReceiver
@@ -125,10 +116,10 @@ extension Transmitter {
         // передача в зависимые координаторы
         getAllCoordinators().forEach { (_c) in
             if let _uc = _c as? Transmitter,
-               _uc.isShared == true || _c === self.rootCoordinator {
+               _uc.options.contains(.shared) || _c === self.rootCoordinator {
                 _uc.send(signal: signal, handledCoordinators: &handledCoordinators, resultSignals: &resultSignals)
-            } else if let _r = _c as? Receiver,
-                      _r.isShared == true || _c === self.rootCoordinator {
+            } else if let _r = _c as? Receiver & Coordinator,
+                      _r.options.contains(.shared) || _c === self.rootCoordinator {
                 if let answer =  _r.receive(signal: signal) {
                     resultSignals.append(answer)
                 }
@@ -137,37 +128,37 @@ extension Transmitter {
     }
     
     // Передача данных, если координатор работает в режиме normal
-    private func send(signalOnTrunkMode signal: Signal,
-                      handledCoordinators: inout [Coordinator],
-                      resultSignals: inout [Signal],
-                      toCoordinators coordinators: [Coordinator] = [],
-                      andControllers controllers: [UIViewController] = []) {
-        
-        // передача в зависимые контроллеры
-        getAllControllers().forEach { _c in
-            if controllers.contains(_c),  let _r = _c as? Receiver {
-                if let answer =  _r.receive(signal: signal) {
-                    resultSignals.append(answer)
-                }
-            }
-        }
-        
-        // передача в зависимые координаторы
-        getAllCoordinators().forEach { (_c) in
-            if coordinators.contains(where: { $0 === _c }) {
-                // Сперва передаем сигнал в ресиверы
-                if let _r = _c as? Receiver {
-                    if let answer =  _r.receive(signal: signal) {
-                        resultSignals.append(answer)
-                    }
-                }
-                // Далее передаем сигнал в трансмиттеры
-                if let _uc = _c as? Transmitter {
-                    _uc.send(signal: signal, handledCoordinators: &handledCoordinators, resultSignals: &resultSignals)
-                }
-            }
-        }
-    }
+//    private func send(signalOnTrunkMode signal: Signal,
+//                      handledCoordinators: inout [Coordinator],
+//                      resultSignals: inout [Signal],
+//                      toCoordinators coordinators: [Coordinator] = [],
+//                      andControllers controllers: [UIViewController] = []) {
+//
+//        // передача в зависимые контроллеры
+//        getAllControllers().forEach { _c in
+//            if controllers.contains(_c),  let _r = _c as? Receiver {
+//                if let answer =  _r.receive(signal: signal) {
+//                    resultSignals.append(answer)
+//                }
+//            }
+//        }
+//
+//        // передача в зависимые координаторы
+//        getAllCoordinators().forEach { (_c) in
+//            if coordinators.contains(where: { $0 === _c }) {
+//                // Сперва передаем сигнал в ресиверы
+//                if let _r = _c as? Receiver {
+//                    if let answer =  _r.receive(signal: signal) {
+//                        resultSignals.append(answer)
+//                    }
+//                }
+//                // Далее передаем сигнал в трансмиттеры
+//                if let _uc = _c as? Transmitter {
+//                    _uc.send(signal: signal, handledCoordinators: &handledCoordinators, resultSignals: &resultSignals)
+//                }
+//            }
+//        }
+//    }
     
     // Возвращает массив всех связанных координаторов
     // включая родительский и дочерние
@@ -204,34 +195,37 @@ extension Transmitter {
         handledCoordinators.append(self)
         
         // если текущий координатор - ресивер, то вызываем соответсвующий методы
-        // - убрано, т.к. данные в ресивер поступают извне
-//        if let _r = self as? Receiver {
-//            if let result = _r.receive(signal: inputSignal) {
-//                resultSignals.append(result)
-//            }
-//        }
+        if let _r = self as? Receiver {
+            if let result = _r.receive(signal: inputSignal) {
+                resultSignals.append(result)
+            }
+        }
         
         // изменение сигнала
         let signal = edit(signal: inputSignal)
         
-        // определение режима работы координатора
-        // и дальнейшая рассылка
-        switch mode {
-        case .normal:
-            send(signalOnNormalMode: signal,
-                 handledCoordinators: &handledCoordinators,
-                 resultSignals: &resultSignals)
-        case .trunk(toCoordinators: let coordinators, andControllers: let controllers):
-            send(signalOnTrunkMode: signal,
-                 handledCoordinators: &handledCoordinators,
-                 resultSignals: &resultSignals,
-                 toCoordinators: coordinators,
-                 andControllers: controllers)
-        case .isolate:
+        // определение режима работы координатора и дальнейшая рассылка сигнала
+        if options.contains(.isolateMode) {
             send(signalOnIsolateMode: signal,
                  handledCoordinators: &handledCoordinators,
                  resultSignals: &resultSignals)
+        } else {
+            send(signalOnNormalMode: signal,
+                 handledCoordinators: &handledCoordinators,
+                 resultSignals: &resultSignals)
         }
+//        switch mode {
+//        case .normal:
+            
+//        case .trunk(toCoordinators: let coordinators, andControllers: let controllers):
+//            send(signalOnTrunkMode: signal,
+//                 handledCoordinators: &handledCoordinators,
+//                 resultSignals: &resultSignals,
+//                 toCoordinators: coordinators,
+//                 andControllers: controllers)
+//        case .isolate:
+            
+//        }
         
     }
 }
@@ -240,7 +234,6 @@ extension Transmitter {
 
 // Координатор-ресивер может обрабатывать принимаемые сигналы
 public protocol Receiver {
-    var isShared: Bool { get set }
     @discardableResult
     func receive(signal: Signal) -> Signal?
 }
@@ -249,20 +242,4 @@ extension Receiver {
    public func receive(signal: Signal) -> Signal? {
         return nil
     }
-}
-
-// MARK: - Types
-
-// Режим работы коодинатора
-// определяет, куда передаются поступающие сигналы
-public enum CoordinatorMode {
-    // Нормальный режим
-    // сигналы передаются в родительский, дочерние координаторы и дочерние контроллеры
-    case normal
-    // Изолированный режим
-    // сигналы передаются в родительский координатора, в дочерние-shared координаторы (isShared == true) и в дочерние контроллеры
-    case isolate
-    // Транк
-    // сигналы передаются только в указанные координаторы
-    case trunk(toCoordinators: [Coordinator], andControllers: [UIViewController])
 }

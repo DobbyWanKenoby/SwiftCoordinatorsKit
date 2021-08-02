@@ -45,8 +45,6 @@ open class BasePresenter: BaseCoordinator, Presenter {
 // Создается на уровне AppDelegate
 // Управляет общей работой приложения и всеми общими для приложения ресурсами
 open class AppCoordinator: BaseCoordinator, Transmitter {
-    public var mode: CoordinatorMode = .normal
-    public var isShared = false
     
     public required init(rootCoordinator: Coordinator? = nil) {
         if rootCoordinator != nil {
@@ -64,8 +62,6 @@ open class AppCoordinator: BaseCoordinator, Transmitter {
 // Создается на уровне SceneDelegate
 // Управляет работой сцены и всеми общими для сцены ресурсами
 open class SceneCoordinator: BasePresenter, Transmitter {
-    public var mode: CoordinatorMode = .normal
-    public var isShared = false
     
     // ссылка на окно, в котором отображается интерфейс
     var window: UIWindow!

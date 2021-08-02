@@ -1,3 +1,6 @@
+### 1.0.2
+- Fixed core bugs
+
 ### 1.0.1
 - Core updated (not compability with old core version)
 - New coordinator's workmodes added (normal, isolate, trunk)

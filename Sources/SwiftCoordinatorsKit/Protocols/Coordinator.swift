@@ -1,5 +1,8 @@
 // Базовый протоколо, которому должен соответствовать юбой координатор
 public protocol Coordinator: class {
+    // Настройки координатора
+    var options: [CoordinatorOption] { get }
+    // Замыкание, которое будет выполнено по завершению потока
     var finishCompletion: (() -> Void)? { get set }
     // ссылка на родительский координатор
     var rootCoordinator: Coordinator? { get set }
@@ -14,6 +17,10 @@ public protocol Coordinator: class {
 
 extension Coordinator {
     
+    public var options: [CoordinatorOption] {
+        return []
+    }
+
     func startFlow(finishCompletion: (() -> Void)? = nil) {
         self.finishCompletion = finishCompletion
     }
@@ -33,4 +40,21 @@ extension Coordinator {
         }
     }
     
+}
+
+// Настройки координатора
+public enum CoordinatorOption {
+    
+    // Общий координатор
+    // Данный в такой координатор передаются даже в случае работы передющего координатора в режиме isolateMode
+    case shared
+
+    // Изолированный режим
+    // сигналы передаются в родительский координатора, в дочерние-shared координаторы (isShared == true) и в дочерние контроллеры
+    // в дочерние координаторы не передаются
+    case isolateMode
+
+    // Режим Транк
+    // сигналы передаются только в указанные координаторы
+    //case trunkMode(toCoordinators: [Coordinator], andControllers: [UIViewController])
 }
