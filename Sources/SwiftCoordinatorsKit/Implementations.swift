@@ -1,9 +1,8 @@
 import UIKit
 
 // Типовые координаторы, которые могут быть использованы в проекте
-// ТАк же на их основе можно создавать собственные координаторы
 
-// MARK: Базовый координатор
+// Базовый координатор
 // При создании принимает ссылку на родительский коодинатор
 open class BaseCoordinator: Coordinator {
     open var options: [CoordinatorOption] = []
@@ -25,7 +24,7 @@ open class BaseCoordinator: Coordinator {
 
 }
 
-// MARK: Базовый презентер
+// Базовый презентер
 // // При создании принимает ссылку на родительский коодинатор и контроллер, в котором будет отображать интерфейс (например Tab Bar Controller или Navigation Controller)
 open class BasePresenter: BaseCoordinator, Presenter {
     open var childControllers: [UIViewController] = []
