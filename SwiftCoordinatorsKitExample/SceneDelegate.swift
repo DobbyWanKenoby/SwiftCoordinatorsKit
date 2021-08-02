@@ -3,6 +3,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var coordinator: SceneCoordinator!
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -16,11 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         window.windowScene = windowScene
         
-        // Первым в приложении создается ApplicationCoordinator
-        let appCoordinator = CoordinatorFactory.getApplicationCoordinator()
-        appCoordinator.window = window
-        appCoordinator.startFlow()
+        coordinator = CoordinatorFactory.getSceneCoordinator(appCoordinator: (UIApplication.shared.delegate as! AppDelegate).coordinator, window: window)
+        let mainFlowCoordinator = CoordinatorFactory.getMainFlowCoordinator(rootCoordinator: coordinator)
+        mainFlowCoordinator.startFlow()
         window.makeKeyAndVisible()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -8,12 +8,12 @@ import UIKit
  На нем можно выводить анимированный SplashScreen, индикатор загрузки и т.д.
  */
 
-protocol InitializatorControllerProtocol where Self: UIViewController {
+protocol GreenControllerProtocol where Self: UIViewController {
     // замыкание, определяющее действие в конце инициализации
     var initializationDidEnd: (() -> Void)? { get set }
 }
 
-class InitializatorController: UIViewController, InitializatorControllerProtocol {
+class GreenController: UIViewController, GreenControllerProtocol {
 
     var initializationDidEnd: (() -> Void)?
     

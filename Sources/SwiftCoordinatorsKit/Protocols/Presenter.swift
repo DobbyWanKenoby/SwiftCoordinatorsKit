@@ -3,6 +3,8 @@ import UIKit
 // Координатор-презентор отвечает за отображение сцен на экране
 // и переход между ними
 public protocol Presenter where Self: Coordinator {
+    // ссылки на дочерние контроллеры
+    // используется, когда в свойстве presenter хранится контейнерный контроллер
     var childControllers: [UIViewController] { get set }
     var presenter: UIViewController? { get set }
     // Переход к экрану

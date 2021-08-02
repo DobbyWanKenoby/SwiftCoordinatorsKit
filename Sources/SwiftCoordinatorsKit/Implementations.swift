@@ -20,25 +20,14 @@ open class BaseCoordinator: Coordinator {
     open func startFlow(finishCompletion: (() -> Void)? = nil) {
         self.finishCompletion = finishCompletion
     }
-    
-    open func finishFlow() {
-        self.finishCompletion?()
-        if let rootCoordinator = rootCoordinator  {
-            for (index, child) in rootCoordinator.childCoordinators.enumerated() {
-               if child === self {
-                    rootCoordinator.childCoordinators.remove(at: index)
-                    child.rootCoordinator = nil
-               }
-           }
-        }
-    }
+
 }
 
 // MARK: Базовый презентер
 // // При создании принимает ссылку на родительский коодинатор и контроллер, в котором будет отображать интерфейс (например Tab Bar Controller или Navigation Controller)
 open class BasePresenter: BaseCoordinator, Presenter {
     open var childControllers: [UIViewController] = []
-    open var presenter: UIViewController?
+    open var presenter: UIViewController? = nil
     required public init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil) {
         super.init(rootCoordinator: rootCoordinator)
         if let presenter = presenter {
@@ -47,6 +36,52 @@ open class BasePresenter: BaseCoordinator, Presenter {
     }
     
     @discardableResult required public init(rootCoordinator: Coordinator? = nil) {
-        fatalError("init(rootCoordinator:) has not been implemented")
+        super.init(rootCoordinator: rootCoordinator)
+        //fatalError("init(rootCoordinator:) has not been implemented")
     }
+}
+
+// MARK: Координатор приложения
+// Создается на уровне AppDelegate
+// Управляет общей работой приложения и всеми общими для приложения ресурсами
+open class AppCoordinator: BaseCoordinator, Transmitter {
+    public var mode: CoordinatorMode = .normal
+    public var isShared = false
+    
+    public required init(rootCoordinator: Coordinator? = nil) {
+        if rootCoordinator != nil {
+            fatalError("AppCoordinator can not have root coordinator")
+        }
+        super.init(rootCoordinator: nil)
+    }
+    
+    convenience init() {
+        self.init(rootCoordinator: nil)
+    }
+}
+
+// MARK: Координатор сцены
+// Создается на уровне SceneDelegate
+// Управляет работой сцены и всеми общими для сцены ресурсами
+open class SceneCoordinator: BasePresenter, Transmitter {
+    public var mode: CoordinatorMode = .normal
+    public var isShared = false
+    
+    // ссылка на окно, в котором отображается интерфейс
+    var window: UIWindow!
+    
+    // при изменении значения
+    open override var presenter: UIViewController? {
+        didSet {
+            window.rootViewController = presenter
+            window.makeKeyAndVisible()
+        }
+    }
+    
+    convenience init(appCoordinator: AppCoordinator, window: UIWindow) {
+        self.init(presenter: nil, rootCoordinator: appCoordinator)
+        self.window = window
+    }
+    
+    
 }
