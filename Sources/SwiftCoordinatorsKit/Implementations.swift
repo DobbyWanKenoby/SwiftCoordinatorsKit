@@ -20,8 +20,9 @@ open class BaseCoordinator: Coordinator {
         }
     }
     
-    open func startFlow(finishCompletion: (() -> Void)? = nil) {
+    open func startFlow(withWork work: (() -> Void)? = nil, finishCompletion: (() -> Void)? = nil) {
         self.finishCompletion = finishCompletion
+        work?()
     }
 
 }
@@ -53,10 +54,6 @@ open class AppCoordinator: BaseCoordinator, Transmitter {
     
     public required init(options: [CoordinatorOption] = []) {
         super.init(rootCoordinator: nil, options: options)
-    }
-    
-    convenience init() {
-        self.init(rootCoordinator: nil)
     }
     
     @discardableResult
