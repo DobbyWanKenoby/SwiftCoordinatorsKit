@@ -78,7 +78,7 @@ open class SceneCoordinator: BasePresenter, Transmitter {
     public var edit: ((Signal) -> Signal)?
     
     // ссылка на окно, в котором отображается интерфейс
-    var window: UIWindow!
+    public var window: UIWindow!
     
     // при изменении значения
     open override var presenter: UIViewController? {
