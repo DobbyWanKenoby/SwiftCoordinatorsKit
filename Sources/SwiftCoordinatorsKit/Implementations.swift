@@ -88,7 +88,7 @@ open class SceneCoordinator: BasePresenter, Transmitter {
         }
     }
     
-    convenience init(appCoordinator: AppCoordinator, window: UIWindow, options: [CoordinatorOption] = []) {
+    public convenience init(appCoordinator: AppCoordinator, window: UIWindow, options: [CoordinatorOption] = []) {
         self.init(presenter: nil, rootCoordinator: appCoordinator, options: options)
         self.window = window
     }
