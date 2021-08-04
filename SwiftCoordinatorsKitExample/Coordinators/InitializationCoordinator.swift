@@ -11,6 +11,7 @@ import SwiftCoordinatorsKit
 protocol InitializatorCoordinatorProtocol: BasePresenter, Transmitter {}
 
 final class InitializatorCoordinator: BasePresenter, InitializatorCoordinatorProtocol {
+    var edit: ((Signal) -> Signal)?
     
     override func startFlow(finishCompletion: (() -> Void)? = nil) {
         super.startFlow(finishCompletion: finishCompletion)

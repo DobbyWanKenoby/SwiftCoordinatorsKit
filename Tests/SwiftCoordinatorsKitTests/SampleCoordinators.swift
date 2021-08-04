@@ -10,6 +10,10 @@ import SwiftCoordinatorsKit
 
 // Пример главного координатора приложения
 class ApplicationCoordinator: Coordinator {
+    var options: [CoordinatorOption] = []
+    
+    var finishCompletion: (() -> Void)?
+    
     var rootCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     
@@ -20,11 +24,17 @@ class ApplicationCoordinator: Coordinator {
 
 // Пример подчиненного координатора
 class ChildCoordinator: Coordinator {
-    var rootCoordinator: Coordinator?
+    var options: [CoordinatorOption] = []
+    
+    var finishCompletion: (() -> Void)?
+    
+    var rootCoordinator: Coordinator? = nil
     var childCoordinators: [Coordinator] = []
+    
     init(rootCoordinator: Coordinator) {
         self.rootCoordinator = rootCoordinator
     }
+    
     func startFlow(finishCompletion: (() -> Void)?) {}
     func finishFlow() {}
 }

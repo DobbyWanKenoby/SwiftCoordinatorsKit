@@ -1,15 +1,27 @@
 import UIKit
 
-// Координатор-презентор отвечает за отображение сцен на экране
-// и переход между ними
+/// Координатор-презентор отвечает за отображение сцен на экране и переход между ними
 public protocol Presenter where Self: Coordinator {
-    // ссылки на дочерние контроллеры
-    // используется, когда в свойстве presenter хранится контейнерный контроллер
+    /// Ссылки на дочерние контроллеры
+    ///
+    /// Данное свойство используется, когда в свойстве ]presenter] хранится контейнерный контроллер и необходимо хранить ссылки на дочерние
     var childControllers: [UIViewController] { get set }
+    /// Главный коонтроллер данного координатора
     var presenter: UIViewController? { get set }
-    // Переход к экрану
+    /// Осуществленеи перехода к новой сцене (новому вью контроллеру)
+    ///
+    /// - Parameters:
+    ///     - from: Контроллер, с которого проиcходит переход
+    ///     - to: Контроллер, к которому происходит переход
+    ///     - method: Тип перехода
+    ///     - completion: Обработчик завершения перехода
     func route(from: UIViewController, to: UIViewController, method: RouteMethod, completion: (() -> Void)?)
-    // Обратный переход с экрана
+    /// Осуществление выхода с экрана
+    ///
+    /// - Parameters:
+    ///     - controller: Контроллер, с которого проиcходит переход
+    ///     - method: Тип перехода
+    ///     - completion: Обработчик завершения перехода
     func disroute(controller: UIViewController, method: DisrouteMethod, completion: (() -> Void)?)
 }
 
@@ -49,8 +61,8 @@ extension Presenter {
 }
 
 // MARK: TransitionDelegate
-// Используется в случае, когда необходимо отобразить сцену с помощью метода route используя кастомный Transition Delegate
 
+/// Данный протокол используется в случае, когда необходимо отобразить сцену с помощью метода `Presenter.route` используя кастомный `Transition Delegate`
 public protocol SCKTransitionDelegate: UIViewControllerTransitioningDelegate {
     init(transitionData: TransitionData?)
 }
@@ -61,19 +73,31 @@ extension SCKTransitionDelegate {
     }
 }
 
-// Данные для UIViewControllerTransitioningDelegate, обеспечивающие кастомный переход
-// Тут могут находиться произвольные данные, которые необходимо передать в UIViewControllerTransitioningDelegate
+/// Данные для `UIViewControllerTransitioningDelegate`, обеспечивающие кастомный переход
+///
+/// Тут могут находиться произвольные данные, которые необходимо передать в `UIViewControllerTransitioningDelegate`
 public protocol TransitionData {}
 
-// Типы переходов между вью контроллерами
+/// Типы перехода между вью контроллерами
 public enum RouteMethod {
+    /// Показать сцену в качестве карточки
     case presentCard
+    /// Показать сцену на веь экран
     case presentFullScreen
+    /// Добавить сцену в Navigation Stack.
+    ///
+    /// Для использования данного элемента отображение контроллера, с которого происходит переход должен быть UINavigationController
     case navigationPush
+    /// Совершить кастомный переход
+    ///
+    /// Для использования данного элемента необходимо реализовать класс, подписанный на протоколы UIViewControllerTransitioningDelegate & SCKTransitionDelegate
     case custom(SCKTransitionDelegate)
 }
 
+/// Типы обратного перехода (выхода) с вью контроллера
 public enum DisrouteMethod {
+    /// Обычнео скрытие контроллера
     case dismiss
+    /// Переход на 1 элемент назад в Navigation Stack
     case navigationPop
 }

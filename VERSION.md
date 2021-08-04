@@ -1,3 +1,7 @@
+### 1.0.5
+- New features added
+- Updated code documentations 
+
 ### 1.0.4
 - Fixed core bugs
 

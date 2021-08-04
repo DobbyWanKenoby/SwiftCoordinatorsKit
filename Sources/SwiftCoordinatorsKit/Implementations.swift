@@ -10,8 +10,9 @@ open class BaseCoordinator: Coordinator {
     open var rootCoordinator: Coordinator? = nil
     open var childCoordinators: [Coordinator] = []
     open var finishCompletion: (() -> Void)? = nil
+    
     @discardableResult
-    required public init(rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
+    public init(rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
         self.options = options
         if let rootCoordinator = rootCoordinator {
             self.rootCoordinator = rootCoordinator
@@ -30,27 +31,25 @@ open class BaseCoordinator: Coordinator {
 open class BasePresenter: BaseCoordinator, Presenter {
     open var childControllers: [UIViewController] = []
     open var presenter: UIViewController? = nil
-    required public init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
+    
+    public init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
         super.init(rootCoordinator: rootCoordinator, options: options)
         if let presenter = presenter {
             self.presenter = presenter
         }
     }
     
-    @discardableResult required public init(rootCoordinator: Coordinator? = nil) {
+    @discardableResult
+    public init(rootCoordinator: Coordinator? = nil) {
         super.init(rootCoordinator: rootCoordinator)
-        //fatalError("init(rootCoordinator:) has not been implemented")
-    }
-    
-    @discardableResult required public init(rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
-        fatalError("init(rootCoordinator:options:) has not been implemented")
     }
 }
 
 // MARK: Координатор приложения
-// Создается на уровне AppDelegate
-// Управляет общей работой приложения и всеми общими для приложения ресурсами
+
+/// Координатор приложения создается на уровне AppDelegate и управляет работой приложения, общими ресурсами и передачей данных на уровне приложения в целом.
 open class AppCoordinator: BaseCoordinator, Transmitter {
+    public var edit: ((Signal) -> Signal)?
     
     public required init(options: [CoordinatorOption] = []) {
         super.init(rootCoordinator: nil, options: options)
@@ -60,7 +59,8 @@ open class AppCoordinator: BaseCoordinator, Transmitter {
         self.init(rootCoordinator: nil)
     }
     
-    @discardableResult required public init(rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
+    @discardableResult
+    public override init(rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
         if rootCoordinator != nil {
             fatalError("init(rootCoordinator:options:) has not been implemented")
         }
@@ -70,9 +70,12 @@ open class AppCoordinator: BaseCoordinator, Transmitter {
 }
 
 // MARK: Координатор сцены
-// Создается на уровне SceneDelegate
-// Управляет работой сцены и всеми общими для сцены ресурсами
+
+/// Координатор сцены создается на уровне SceneDelegate и управляет работой сцены, передачей данных и общими ресурсами на уровне сцены.
+///
+/// В режиме работы с несколькими сценами (например на iPad) у каждой из них будет свой SceneCoordinator
 open class SceneCoordinator: BasePresenter, Transmitter {
+    public var edit: ((Signal) -> Signal)?
     
     // ссылка на окно, в котором отображается интерфейс
     var window: UIWindow!

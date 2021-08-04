@@ -9,6 +9,7 @@ import SwiftCoordinatorsKit
 protocol MainFlowCoordinatorProtocol: BasePresenter, Transmitter {}
 
 class MainFlowCoordinator: BasePresenter, MainFlowCoordinatorProtocol {
+    var edit: ((Signal) -> Signal)?
     
     override var presenter: UIViewController? {
         didSet {
@@ -21,14 +22,16 @@ class MainFlowCoordinator: BasePresenter, MainFlowCoordinatorProtocol {
     }
     
     required public init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil) {
-        fatalError("init(presenter:rootCoordinator:) has not been implemented")
+        fatalError("init(presenter:rootCoordinator:) has not been implementoverride ed")
     }
     
-    required public init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
+    required
+    public override init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
         fatalError("init(presenter:rootCoordinator:options:) has not been implemented")
     }
     
-    @discardableResult required public init(rootCoordinator: Coordinator? = nil) {
+    @discardableResult
+    public override init(rootCoordinator: Coordinator? = nil) {
         fatalError("init(rootCoordinator:) has not been implemented")
     }
     

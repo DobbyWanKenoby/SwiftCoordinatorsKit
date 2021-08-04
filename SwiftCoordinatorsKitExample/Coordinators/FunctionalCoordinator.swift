@@ -9,6 +9,7 @@ import SwiftCoordinatorsKit
 protocol FunctionalCoordinatorProtocol: BasePresenter, Transmitter {}
 
 final class FunctionalCoordinator: BasePresenter, FunctionalCoordinatorProtocol {
+    var edit: ((Signal) -> Signal)?
     
     // используется для доступа к презентеру, как к Navigation Controller
     // свойство - синтаксический сахар
@@ -25,11 +26,12 @@ final class FunctionalCoordinator: BasePresenter, FunctionalCoordinatorProtocol 
         fatalError("init(presenter:rootCoordinator:) has not been implemented")
     }
     
-    @discardableResult required public init(rootCoordinator: Coordinator? = nil) {
+    @discardableResult
+    public override init(rootCoordinator: Coordinator? = nil) {
         fatalError("init(rootCoordinator:) has not been implemented")
     }
     
-    required public init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
+    public override init(presenter: UIViewController?, rootCoordinator: Coordinator? = nil, options: [CoordinatorOption] = []) {
         fatalError("init(presenter:rootCoordinator:options:) has not been implemented")
     }
     

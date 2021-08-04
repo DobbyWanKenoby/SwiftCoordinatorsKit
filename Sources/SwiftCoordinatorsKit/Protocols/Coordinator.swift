@@ -1,27 +1,37 @@
-// Базовый протоколо, которому должен соответствовать юбой координатор
+/// Базовый протокол, которому должен соответствовать любой координатор
 public protocol Coordinator: AnyObject {
-    // Настройки координатора
+    /// Настройки координатора
     var options: [CoordinatorOption] { get }
-    // Замыкание, которое будет выполнено по завершению потока
+    /// Замыкание, которое должно быть выполнено по завершению потока (в методе finishFlow)
     var finishCompletion: (() -> Void)? { get set }
-    // ссылка на родительский координатор
+    /// Ссылка на родительский координатор
     var rootCoordinator: Coordinator? { get set }
-    // ссылки на дочерние координаторы
+    /// Ссылки на дочерние координаторы
     var childCoordinators: [Coordinator] { get set }
-    // старт работы координатора
-    func startFlow(finishCompletion: (() -> Void)?)
-    // завершение рабоыт координатора
-    // при этом выполняется замыкание, переданное в startFlow
-    func finishFlow()
+    /// Старт выполнения потока координатора
+    /// - Parameters:
+    ///    - withWork: работа, которая должна быть выполнена в процессе старта выполнения потока координатора
+    ///    - finishCompletion: работа, которая должна быть выполнена в процессе завершения рабоыт координатора
+    func startFlow(withWork: (() -> Void)?, finishCompletion: (() -> Void)?)
+    /// Завершение потока координатора.
+    ///
+    /// При этом должно быть выполнено замыкание, переданное в startFlow в параметре finishCompletion. Помимо этого дополнительно может быть передана некоторые инструкции, требующие выполнения. При завершении выполнения потока данный метод вызывается для всех дочерних координаторов
+    /// - Parameters:
+    ///    - withWork: работа, которая должна быть выполнена в процессе завершения выполнения потока координатора
+    func finishFlow(withWork: (() -> Void)?)
 }
 
 extension Coordinator {
-
-    func startFlow(finishCompletion: (() -> Void)? = nil) {
+    
+    public func startFlow(withWork work: (() -> Void)?, finishCompletion: (() -> Void)? = nil) {
+        // сохраняем замыкание, которое должно быть выполнено в конце потока
         self.finishCompletion = finishCompletion
+        // выполняем переданные инструкции
+        work?()
     }
     
-    public func finishFlow() {
+    public func finishFlow(withWork work: (() -> Void)? = nil) {
+        work?()
         self.finishCompletion?()
         if let rootCoordinator = rootCoordinator  {
             for (index, child) in rootCoordinator.childCoordinators.enumerated() {
@@ -32,22 +42,23 @@ extension Coordinator {
             }
         }
         childCoordinators.forEach { (coordinator) in
-            coordinator.finishFlow()
+            coordinator.finishFlow(withWork: nil)
         }
     }
     
 }
 
-// Настройки координатора
+/// Настройки координатора
 public enum CoordinatorOption {
     
-    // Общий координатор
-    // Данный в такой координатор передаются даже в случае работы передющего координатора в режиме isolateMode
+    /// Общий координатор.
+    ///
+    /// Данный параметр используется при передаче данных Трансмиттерами (`Transmitter`). В случае, если координатора является общим, то данные передаются в него, даже если передающий Трансмиттер находится в изолированном режиме (см. настройку `isolateMode`)
     case shared
 
-    // Изолированный режим
-    // сигналы передаются в родительский координатора, в дочерние-shared координаторы (isShared == true) и в дочерние контроллеры
-    // в дочерние координаторы не передаются
+    /// Изолированный режим
+    /// 
+    /// При использовании данного режима сигналы (`Signal`) передаются в родительский координатора, в дочерние-shared координаторы (`.shared`) и в дочерние контроллеры. В дочерние НЕ общие координаторы сигналы не передаются
     case isolateMode
 
     // Режим Транк
