@@ -4,7 +4,7 @@ import UIKit
 public protocol Presenter where Self: Coordinator {
     /// Ссылки на дочерние контроллеры
     ///
-    /// Данное свойство используется, когда в свойстве ]presenter] хранится контейнерный контроллер и необходимо хранить ссылки на дочерние
+    /// Данное свойство используется, когда в свойстве `presenter` хранится контейнерный контроллер и необходимо хранить ссылки на дочерние
     var childControllers: [UIViewController] { get set }
     /// Главный коонтроллер данного координатора
     var presenter: UIViewController? { get set }

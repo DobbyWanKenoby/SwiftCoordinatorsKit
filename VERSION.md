@@ -1,4 +1,7 @@
 ### 1.0.5
+- Documentation updated
+
+### 1.0.5
 - New features added
 - Updated code documentations 
 

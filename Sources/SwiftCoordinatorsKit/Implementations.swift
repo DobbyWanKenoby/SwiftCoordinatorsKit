@@ -4,7 +4,10 @@ import UIKit
 // ТАк же на их основе можно создавать собственные координаторы
 
 // MARK: Базовый координатор
-// При создании принимает ссылку на родительский коодинатор
+
+/// Базовый координатор содержит базовую функциональность.
+///
+/// Рекоменудется наследовать собственные координаторы от данного.
 open class BaseCoordinator: Coordinator {
     open var options: [CoordinatorOption] = []
     open var rootCoordinator: Coordinator? = nil
@@ -28,7 +31,10 @@ open class BaseCoordinator: Coordinator {
 }
 
 // MARK: Базовый презентер
-// // При создании принимает ссылку на родительский коодинатор и контроллер, в котором будет отображать интерфейс (например Tab Bar Controller или Navigation Controller)
+
+/// Базовый координатор-презентер содержит базовую функциональность Презентера.
+///
+/// Рекоменудется наследовать собственные координаторы от данного.
 open class BasePresenter: BaseCoordinator, Presenter {
     open var childControllers: [UIViewController] = []
     open var presenter: UIViewController? = nil
@@ -49,6 +55,8 @@ open class BasePresenter: BaseCoordinator, Presenter {
 // MARK: Координатор приложения
 
 /// Координатор приложения создается на уровне AppDelegate и управляет работой приложения, общими ресурсами и передачей данных на уровне приложения в целом.
+///
+/// Рекомендуется использовать данный координатор для управления на уровне приложения.
 open class AppCoordinator: BaseCoordinator, Transmitter {
     public var edit: ((Signal) -> Signal)?
     
@@ -70,7 +78,8 @@ open class AppCoordinator: BaseCoordinator, Transmitter {
 
 /// Координатор сцены создается на уровне SceneDelegate и управляет работой сцены, передачей данных и общими ресурсами на уровне сцены.
 ///
-/// В режиме работы с несколькими сценами (например на iPad) у каждой из них будет свой SceneCoordinator
+/// В режиме работы с несколькими сценами (например на iPad) у каждой из них будет свой SceneCoordinator.
+/// Рекомендуется использовать данный координатор для управления на уровне сцены.
 open class SceneCoordinator: BasePresenter, Transmitter {
     public var edit: ((Signal) -> Signal)?
     
@@ -89,6 +98,5 @@ open class SceneCoordinator: BasePresenter, Transmitter {
         self.init(presenter: nil, rootCoordinator: appCoordinator, options: options)
         self.window = window
     }
-    
     
 }
