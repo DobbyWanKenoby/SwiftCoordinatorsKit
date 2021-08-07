@@ -1,4 +1,4 @@
-### 1.0.5
+### 1.0.7
 - Documentation updated
 
 ### 1.0.5
