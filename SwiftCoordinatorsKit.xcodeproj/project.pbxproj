@@ -25,6 +25,9 @@
 		84946B3826B2BB910037AF42 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84946B3726B2BB910037AF42 /* Presenter.swift */; };
 		84A4D2C326B2E8A5006DDCAF /* SampleCoordinators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4D2C226B2E8A5006DDCAF /* SampleCoordinators.swift */; };
 		84CFBF9226B7F5F100A995BC /* MainFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CFBF9126B7F5F100A995BC /* MainFlowCoordinator.swift */; };
+		E04DCCE026F78B76003B4F8E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DCCDF26F78B76003B4F8E /* BaseCoordinator.swift */; };
+		E04DCCE226F78B8F003B4F8E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DCCE126F78B8F003B4F8E /* AppCoordinator.swift */; };
+		E04DCCE426F78BB4003B4F8E /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DCCE326F78BB4003B4F8E /* BasePresenter.swift */; };
 		E063FB3826BAA043000F1B56 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E063FB3726BAA043000F1B56 /* Receiver.swift */; };
 		E063FB3926BAA043000F1B56 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E063FB3726BAA043000F1B56 /* Receiver.swift */; };
 		E0BFEC5D26B5EBEC004EA380 /* SwiftCoordinatorsKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BFEC5C26B5EBEC004EA380 /* SwiftCoordinatorsKitExampleTests.swift */; };
@@ -34,7 +37,6 @@
 		E0BFEC6F26B6A0CD004EA380 /* ControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BFEC6D26B6A0CD004EA380 /* ControllerFactory.swift */; };
 		E0BFEC7026B6A6B3004EA380 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84946B3726B2BB910037AF42 /* Presenter.swift */; };
 		E0BFEC7126B6A6B6004EA380 /* Transmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Transmitter.swift */; };
-		E0BFEC7226B6A6B8004EA380 /* Implementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Implementations.swift */; };
 		E0BFEC7426B6A8AC004EA380 /* FunctionalCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BFEC7326B6A8AC004EA380 /* FunctionalCoordinator.swift */; };
 		E0BFEC7626B6A9EB004EA380 /* RedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BFEC7526B6A9EB004EA380 /* RedController.swift */; };
 		E0D5337F26B5646600C6A0F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D5337E26B5646600C6A0F1 /* AppDelegate.swift */; };
@@ -43,7 +45,7 @@
 		E0D5338826B5646700C6A0F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0D5338726B5646700C6A0F1 /* Assets.xcassets */; };
 		E0D5338B26B5646700C6A0F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D5338926B5646700C6A0F1 /* LaunchScreen.storyboard */; };
 		E0D5339226B5650E00C6A0F1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84946B2D26B2BB290037AF42 /* Coordinator.swift */; };
-		OBJ_27 /* Implementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Implementations.swift */; };
+		OBJ_27 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* SceneCoordinator.swift */; };
 		OBJ_28 /* Transmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Transmitter.swift */; };
 		OBJ_29 /* ViewControllerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* ViewControllerLoader.swift */; };
 		OBJ_36 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
@@ -87,6 +89,9 @@
 		84946B3726B2BB910037AF42 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		84A4D2C226B2E8A5006DDCAF /* SampleCoordinators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleCoordinators.swift; sourceTree = "<group>"; };
 		84CFBF9126B7F5F100A995BC /* MainFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowCoordinator.swift; sourceTree = "<group>"; };
+		E04DCCDF26F78B76003B4F8E /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		E04DCCE126F78B8F003B4F8E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		E04DCCE326F78BB4003B4F8E /* BasePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenter.swift; sourceTree = "<group>"; };
 		E063FB3726BAA043000F1B56 /* Receiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receiver.swift; sourceTree = "<group>"; };
 		E0BFEC5A26B5EBEC004EA380 /* SwiftCoordinatorsKitExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftCoordinatorsKitExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0BFEC5C26B5EBEC004EA380 /* SwiftCoordinatorsKitExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftCoordinatorsKitExampleTests.swift; sourceTree = "<group>"; };
@@ -104,7 +109,7 @@
 		E0D5338726B5646700C6A0F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0D5338A26B5646700C6A0F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0D5338C26B5646700C6A0F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		OBJ_10 /* Implementations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Implementations.swift; sourceTree = "<group>"; };
+		OBJ_10 /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		OBJ_11 /* Transmitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transmitter.swift; sourceTree = "<group>"; };
 		OBJ_12 /* ViewControllerLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerLoader.swift; sourceTree = "<group>"; };
 		OBJ_15 /* SwiftCoordinatorsKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftCoordinatorsKitTests.swift; sourceTree = "<group>"; };
@@ -165,6 +170,17 @@
 				E063FB3726BAA043000F1B56 /* Receiver.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E04DCCDE26F78B5A003B4F8E /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				E04DCCE126F78B8F003B4F8E /* AppCoordinator.swift */,
+				OBJ_10 /* SceneCoordinator.swift */,
+				E04DCCE326F78BB4003B4F8E /* BasePresenter.swift */,
+				E04DCCDF26F78B76003B4F8E /* BaseCoordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		E0BFEC5B26B5EBEC004EA380 /* SwiftCoordinatorsKitExampleTests */ = {
@@ -267,8 +283,8 @@
 			isa = PBXGroup;
 			children = (
 				84946B2C26B2BB1D0037AF42 /* Protocols */,
+				E04DCCDE26F78B5A003B4F8E /* Coordinators */,
 				846834C226B2BF8000BEC80B /* Helpers */,
-				OBJ_10 /* Implementations.swift */,
 			);
 			name = SwiftCoordinatorsKit;
 			path = Sources/SwiftCoordinatorsKit;
@@ -442,7 +458,6 @@
 				E0BFEC6926B6A0BC004EA380 /* InitializationCoordinator.swift in Sources */,
 				E0BFEC6A26B6A0BC004EA380 /* CoordinatorFactory.swift in Sources */,
 				E0BFEC7626B6A9EB004EA380 /* RedController.swift in Sources */,
-				E0BFEC7226B6A6B8004EA380 /* Implementations.swift in Sources */,
 				E063FB3926BAA043000F1B56 /* Receiver.swift in Sources */,
 				E0BFEC6E26B6A0CD004EA380 /* GreenController.swift in Sources */,
 				E0D5339226B5650E00C6A0F1 /* Coordinator.swift in Sources */,
@@ -457,10 +472,13 @@
 			buildActionMask = 0;
 			files = (
 				E063FB3826BAA043000F1B56 /* Receiver.swift in Sources */,
+				E04DCCE226F78B8F003B4F8E /* AppCoordinator.swift in Sources */,
 				84946B3826B2BB910037AF42 /* Presenter.swift in Sources */,
-				OBJ_27 /* Implementations.swift in Sources */,
+				OBJ_27 /* SceneCoordinator.swift in Sources */,
 				84946B2E26B2BB290037AF42 /* Coordinator.swift in Sources */,
+				E04DCCE026F78B76003B4F8E /* BaseCoordinator.swift in Sources */,
 				OBJ_28 /* Transmitter.swift in Sources */,
+				E04DCCE426F78BB4003B4F8E /* BasePresenter.swift in Sources */,
 				OBJ_29 /* ViewControllerLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

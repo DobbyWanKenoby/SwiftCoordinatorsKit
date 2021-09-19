@@ -3,12 +3,13 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    // координатор приложения
     var coordinator: AppCoordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Создание координатора приложения
         coordinator = CoordinatorFactory.getAppCoordinator()
-        coordinator.startFlow(finishCompletion: nil)
         return true
     }
 
