@@ -28,6 +28,11 @@
 		E04DCCE026F78B76003B4F8E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DCCDF26F78B76003B4F8E /* BaseCoordinator.swift */; };
 		E04DCCE226F78B8F003B4F8E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DCCE126F78B8F003B4F8E /* AppCoordinator.swift */; };
 		E04DCCE426F78BB4003B4F8E /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DCCE326F78BB4003B4F8E /* BasePresenter.swift */; };
+		E04DCD3126F8F919003B4F8E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84946B2D26B2BB290037AF42 /* Coordinator.swift */; };
+		E04DCD3226F8F91C003B4F8E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DCCE126F78B8F003B4F8E /* AppCoordinator.swift */; };
+		E04DCD3326F8F91E003B4F8E /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* SceneCoordinator.swift */; };
+		E04DCD3426F8F920003B4F8E /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DCCDF26F78B76003B4F8E /* BaseCoordinator.swift */; };
+		E04DCD3526F8F922003B4F8E /* BasePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04DCCE326F78BB4003B4F8E /* BasePresenter.swift */; };
 		E063FB3826BAA043000F1B56 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E063FB3726BAA043000F1B56 /* Receiver.swift */; };
 		E063FB3926BAA043000F1B56 /* Receiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E063FB3726BAA043000F1B56 /* Receiver.swift */; };
 		E0BFEC5D26B5EBEC004EA380 /* SwiftCoordinatorsKitExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0BFEC5C26B5EBEC004EA380 /* SwiftCoordinatorsKitExampleTests.swift */; };
@@ -44,7 +49,6 @@
 		E0D5338626B5646600C6A0F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D5338426B5646600C6A0F1 /* Main.storyboard */; };
 		E0D5338826B5646700C6A0F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0D5338726B5646700C6A0F1 /* Assets.xcassets */; };
 		E0D5338B26B5646700C6A0F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D5338926B5646700C6A0F1 /* LaunchScreen.storyboard */; };
-		E0D5339226B5650E00C6A0F1 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84946B2D26B2BB290037AF42 /* Coordinator.swift */; };
 		OBJ_27 /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* SceneCoordinator.swift */; };
 		OBJ_28 /* Transmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* Transmitter.swift */; };
 		OBJ_29 /* ViewControllerLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* ViewControllerLoader.swift */; };
@@ -177,8 +181,8 @@
 			children = (
 				E04DCCE126F78B8F003B4F8E /* AppCoordinator.swift */,
 				OBJ_10 /* SceneCoordinator.swift */,
-				E04DCCE326F78BB4003B4F8E /* BasePresenter.swift */,
 				E04DCCDF26F78B76003B4F8E /* BaseCoordinator.swift */,
+				E04DCCE326F78BB4003B4F8E /* BasePresenter.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -453,17 +457,21 @@
 			files = (
 				E0BFEC7026B6A6B3004EA380 /* Presenter.swift in Sources */,
 				84CFBF9226B7F5F100A995BC /* MainFlowCoordinator.swift in Sources */,
+				E04DCD3126F8F919003B4F8E /* Coordinator.swift in Sources */,
 				E0BFEC7126B6A6B6004EA380 /* Transmitter.swift in Sources */,
 				E0BFEC6F26B6A0CD004EA380 /* ControllerFactory.swift in Sources */,
 				E0BFEC6926B6A0BC004EA380 /* InitializationCoordinator.swift in Sources */,
+				E04DCD3326F8F91E003B4F8E /* SceneCoordinator.swift in Sources */,
+				E04DCD3226F8F91C003B4F8E /* AppCoordinator.swift in Sources */,
 				E0BFEC6A26B6A0BC004EA380 /* CoordinatorFactory.swift in Sources */,
 				E0BFEC7626B6A9EB004EA380 /* RedController.swift in Sources */,
 				E063FB3926BAA043000F1B56 /* Receiver.swift in Sources */,
 				E0BFEC6E26B6A0CD004EA380 /* GreenController.swift in Sources */,
-				E0D5339226B5650E00C6A0F1 /* Coordinator.swift in Sources */,
 				E0BFEC7426B6A8AC004EA380 /* FunctionalCoordinator.swift in Sources */,
+				E04DCD3526F8F922003B4F8E /* BasePresenter.swift in Sources */,
 				E0D5337F26B5646600C6A0F1 /* AppDelegate.swift in Sources */,
 				E0D5338126B5646600C6A0F1 /* SceneDelegate.swift in Sources */,
+				E04DCD3426F8F920003B4F8E /* BaseCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,7 +825,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 109;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -831,7 +839,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift/macosx",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.9;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";
@@ -851,7 +859,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
-				CURRENT_PROJECT_VERSION = 105;
+				CURRENT_PROJECT_VERSION = 109;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -865,7 +873,7 @@
 					"$(TOOLCHAIN_DIR)/usr/lib/swift/macosx",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.9;
 				OTHER_CFLAGS = "$(inherited)";
 				OTHER_LDFLAGS = "$(inherited)";
 				OTHER_SWIFT_FLAGS = "$(inherited)";

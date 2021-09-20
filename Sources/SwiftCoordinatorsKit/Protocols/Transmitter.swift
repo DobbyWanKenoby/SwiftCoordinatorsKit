@@ -67,10 +67,6 @@ public protocol Transmitter where Self: Coordinator {
 
 extension Transmitter {
     
-    var edit: ((Signal) -> Signal)? {
-        nil
-    }
-    
     public func edit(signal: Signal) -> Signal {
         return signal
     }

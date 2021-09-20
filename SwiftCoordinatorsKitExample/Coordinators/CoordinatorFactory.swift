@@ -4,7 +4,6 @@
  */
 
 import UIKit
-import SwiftCoordinatorsKit
 
 class CoordinatorFactory {
     

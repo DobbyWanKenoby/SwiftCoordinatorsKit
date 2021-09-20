@@ -3,7 +3,10 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var coordinator: SceneCoordinator!
+    // главный координатор сцены
+    lazy var coordinator: SceneCoordinator = {
+        return SceneCoordinator(appCoordinator: (UIApplication.shared.delegate as! AppDelegate).coordinator, window: window!)
+    }()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -13,8 +16,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         window.windowScene = windowScene
         
-        // создание координатор сцены
-        coordinator = CoordinatorFactory.getSceneCoordinator(appCoordinator: (UIApplication.shared.delegate as! AppDelegate).coordinator, window: window)
         // создание координатора основного потока
         let mainFlowCoordinator = CoordinatorFactory.getMainFlowCoordinator(rootCoordinator: coordinator)
         mainFlowCoordinator.startFlow()

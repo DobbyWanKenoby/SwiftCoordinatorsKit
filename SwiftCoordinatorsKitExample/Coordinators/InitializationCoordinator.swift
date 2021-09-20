@@ -6,15 +6,14 @@
  */
 
 import UIKit
-import SwiftCoordinatorsKit
 
 protocol InitializatorCoordinatorProtocol: BasePresenter, Transmitter {}
 
 final class InitializatorCoordinator: BasePresenter, InitializatorCoordinatorProtocol {
     var edit: ((Signal) -> Signal)?
     
-    override func startFlow(finishCompletion: (() -> Void)? = nil) {
-        super.startFlow(finishCompletion: finishCompletion)
+    override func startFlow(withWork work: (() -> Void)? = nil, finishCompletion: (() -> Void)? = nil) {
+        super.startFlow(withWork: work, finishCompletion: finishCompletion)
         (self.presenter as? GreenControllerProtocol)?.initializationDidEnd = {
             // действия на контроллере, которые будут выполнены в конце инициализации
             self.finishFlow()

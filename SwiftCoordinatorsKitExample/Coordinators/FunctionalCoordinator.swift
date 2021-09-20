@@ -4,7 +4,6 @@
  */
 
 import UIKit
-import SwiftCoordinatorsKit
 
 protocol FunctionalCoordinatorProtocol: BasePresenter, Transmitter {}
 
@@ -35,8 +34,8 @@ final class FunctionalCoordinator: BasePresenter, FunctionalCoordinatorProtocol 
         fatalError("init(presenter:rootCoordinator:options:) has not been implemented")
     }
     
-    override func startFlow(finishCompletion: (() -> Void)? = nil) {
-        super.startFlow(finishCompletion: finishCompletion)
+    override func startFlow(withWork work: (() -> Void)? = nil, finishCompletion: (() -> Void)? = nil) {
+        super.startFlow(withWork: work, finishCompletion: finishCompletion)
         
         let c = ControllerFactory.getRedController()
         navigationPresenter.viewControllers.append(c)

@@ -4,12 +4,11 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // координатор приложения
-    var coordinator: AppCoordinator!
+    lazy var coordinator: AppCoordinator = {
+        return AppCoordinator()
+    }()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        // Создание координатора приложения
-        coordinator = CoordinatorFactory.getAppCoordinator()
         return true
     }
 
